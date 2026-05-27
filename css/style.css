@@ -1,0 +1,331 @@
+/* ===== ПЕРЕМЕННЫЕ ===== */
+:root {
+  --bg-primary: #0f0f0f;
+  --bg-secondary: #1a1a1a;
+  --bg-card: #222222;
+  --text-primary: #ffffff;
+  --text-secondary: #aaaaaa;
+  --accent: #e50914;
+  --border-radius: 8px;
+  --gap: 20px;
+}
+
+/* ===== СБРОС ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+/* ===== ХЕДЕР ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+.search-box {
+  display: flex;
+  gap: 8px;
+}
+
+.search-input {
+  width: 300px;
+  padding: 10px 16px;
+  border: 1px solid #444;
+  border-radius: var(--border-radius);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+}
+
+.search-btn {
+  padding: 10px 20px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.search-btn:hover {
+  opacity: 0.85;
+}
+/* ===== СЕТКА ===== */
+.main {
+  padding: 32px;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--gap);
+  align-items: start;
+}
+
+/* ===== КАРТОЧКА ===== */
+.movie-card {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.movie-card:hover {
+  transform: translateY(-6px);
+}
+
+.movie-poster {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  display: block;
+  max-height: 300px;
+}
+
+.movie-info {
+  padding: 12px;
+}
+
+.movie-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-year {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.movie-rating {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .main {
+    padding: 16px;
+  }
+}
+/* ===== СОСТОЯНИЯ ===== */
+.empty-state {
+  color: var(--text-secondary);
+  font-size: 18px;
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 60px 0;
+}
+
+.loading {
+  color: var(--text-secondary);
+  font-size: 18px;
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 60px 0;
+}
+
+.error {
+  color: var(--accent);
+  font-size: 18px;
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 60px 0;
+}
+/* ===== МОДАЛКА ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.hidden {
+  display: none;
+}
+
+.modal {
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.modal-close:hover {
+  opacity: 1;
+}
+
+.modal-content {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+}
+
+.modal-poster {
+  width: 200px;
+  min-width: 200px;
+  border-radius: var(--border-radius);
+  object-fit: cover;
+}
+
+.modal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  padding-right: 30px;
+}
+
+.modal-year,
+.modal-rating {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.modal-overview {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.modal-fav-btn {
+  margin-top: auto;
+  padding: 10px 20px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity 0.2s;
+}
+
+.modal-fav-btn:hover {
+  opacity: 0.85;
+}
+
+.modal-fav-btn.saved {
+  background-color: #444;
+}
+
+/* ===== АДАПТИВНОСТЬ МОДАЛКИ ===== */
+@media (max-width: 600px) {
+  .modal-content {
+    flex-direction: column;
+  }
+
+  .modal-poster {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+.fav-tab-btn {
+  padding: 10px 20px;
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fav-tab-btn:hover {
+  background-color: var(--accent);
+  color: white;
+}
+
+.fav-tab-btn.active {
+  background-color: var(--accent);
+  color: white;
+}
+/* ===== АНИМАЦИИ ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.movie-card {
+  animation: fadeInUp 0.3s ease forwards;
+}
