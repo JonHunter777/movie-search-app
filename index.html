@@ -18,6 +18,7 @@
         />
         <button class="search-btn">Найти</button>
       </div>
+      <button class="fav-tab-btn" id="fav-tab-btn">❤️ Избранное</button>
     </header>
 
     <main class="main">
@@ -61,6 +62,22 @@
 
       </div>
     </main>
+
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <button class="modal-close" id="modal-close">✕</button>
+            <div class="modal-content">
+            <img class="modal-poster" id="modal-poster" src="" alt="" />
+            <div class="modal-info">
+                <h2 class="modal-title" id="modal-title"></h2>
+                <p class="modal-year" id="modal-year"></p>
+                <p class="modal-rating" id="modal-rating"></p>
+                <p class="modal-overview" id="modal-overview"></p>
+                <button class="modal-fav-btn" id="modal-fav-btn">❤️ В избранное</button>
+            </div>
+            </div>
+        </div>
+    </div>
 
     <script src="config.js"></script>
     <script src="js/api.js"></script>
